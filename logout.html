@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - AI PM Internship Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --india-saffron: #FF9933;
+            --india-white: #FFFFFF;
+            --india-green: #138808;
+            --india-blue: #000080;
+            --govt-blue: #1E3A8A;
+            --govt-light-blue: #3B82F6;
+            --govt-light-gray: #F8FAFC;
+            --govt-dark-gray: #1F2937;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--govt-dark-gray);
+            background-color: #f5f7fa;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header with Indian Government Theme */
+        .govt-header {
+            background: var(--india-white);
+            border-bottom: 3px solid var(--india-saffron);
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .govt-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .govt-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ashoka-chakra {
+            width: 40px;
+            height: 40px;
+            background: var(--india-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--india-white);
+            font-size: 20px;
+        }
+
+        .govt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--govt-blue);
+        }
+
+        .govt-header-bottom {
+            background: var(--govt-blue);
+            padding: 10px 0;
+        }
+
+        .govt-nav {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .govt-nav a {
+            color: var(--india-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .govt-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 160px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: var(--govt-blue);
+            color: white;
+            padding: 20px 0;
+        }
+
+        .company-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--india-white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: var(--govt-blue);
+        }
+
+        .company-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .company-gst {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .sidebar-menu li {
+            padding: 15px 25px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--india-saffron);
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sidebar-menu i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: var(--govt-light-gray);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logout-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .logout-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .logout-title {
+            color: var(--govt-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .logout-message {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .user-info {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--govt-dark-gray);
+            font-weight: 500;
+        }
+
+        .logout-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .action-button {
+            background: var(--govt-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+
+        .action-button:hover {
+            background: var(--india-blue);
+        }
+
+        .action-button.secondary {
+            background: var(--india-white);
+            color: var(--govt-blue);
+            border: 1px solid var(--govt-blue);
+        }
+
+        .action-button.secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .action-button.logout {
+            background: #ef4444;
+        }
+
+        .action-button.logout:hover {
+            background: #dc2626;
+        }
+
+        /* Footer */
+        .govt-footer {
+            background: var(--govt-blue);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .logout-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .govt-nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .logout-actions {
+                flex-direction: column;
+            }
+            
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Government Header -->
+    <header class="govt-header">
+        <div class="govt-header-top">
+            <div class="govt-logo">
+                <div class="ashoka-chakra">
+                    <i class="fas fa-chakra"></i>
+                </div>
+                <div class="govt-title">
+                    Ministry of Electronics & Information Technology<br>
+                    <small>AI Product Management Internship Program</small>
+                </div>
+            </div>
+            <div class="user-menu">
+                <button class="action-button">
+                    <i class="fas fa-user"></i> Company Profile
+                </button>
+            </div>
+        </div>
+        <div class="govt-header-bottom">
+            <nav>
+                <ul class="govt-nav">
+                    <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i> Schemes</a></li>
+                    <li><a href="#"><i class="fas fa-download"></i> Downloads</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="company-profile">
+                <div class="company-logo">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="company-name">Tech Solutions India Ltd.</div>
+                <div class="company-gst">GSTIN: 29ABCDE1234F1Z5</div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="Company_dashboard/"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="internship_post.html"><i class="fas fa-briefcase"></i> Internship Posts</a></li>
+                <li><a href="application.html"><i class="fas fa-file-alt"></i> Applications</a></li>
+                <li><a href="student_tab.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+                <li><a href="report.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="setting.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="help.html"><i class="fas fa-question-circle"></i> Help</a></li>
+                <li class="active"><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="logout-container">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h2 class="logout-title">Confirm Logout</h2>
+                <p class="logout-message">Are you sure you want to logout from your account?</p>
+                
+                <div class="user-info">
+                    <div class="info-item">
+                        <span class="info-label">Logged in as:</span>
+                        <span class="info-value">Tech Solutions India Ltd.</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">User ID:</span>
+                        <span class="info-value">COMP2023TSI5678</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Login time:</span>
+                        <span class="info-value">Today, 09:42 AM</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Session duration:</span>
+                        <span class="info-value">3 hours 28 minutes</span>
+                    </div>
+                </div>
+                
+                <div class="logout-actions">
+                    <button class="action-button secondary" id="cancelLogout">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button class="action-button logout" id="confirmLogout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="govt-footer">
+        <div class="footer-links">
+            <a href="#">Accessibility</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="copyright">
+            © 2023 Ministry of Electronics & Information Technology, Government of India. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cancel logout functionality
+            const cancelButton = document.getElementById('cancelLogout');
+            
+            cancelButton.addEventListener('click', function() {
+                alert('Logout cancelled. Returning to dashboard...');
+                // In a real application, this would redirect to dashboard
+                window.location.href = 'index.html'; // Simulating redirect
+            });
+            
+            // Confirm logout functionality
+            const confirmButton = document.getElementById('confirmLogout');
+            
+            confirmButton.addEventListener('click', function() {
+                // Show loading state
+                confirmButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging out...';
+                confirmButton.disabled = true;
+                
+                // Simulate logout process
+                setTimeout(function() {
+                    alert('You have been successfully logged out. Redirecting to login page...');
+                    // In a real application, this would redirect to login page
+                    window.location.href = 'index.html'; // Simulating redirect
+                }, 1500);
+            });
+            
+            // Add some session time update functionality for demo purposes
+            let sessionDuration = 208; // in minutes (3 hours 28 minutes)
+            const sessionInfo = document.querySelector('.info-item:nth-child(4) .info-value');
+            
+            setInterval(function() {
+                sessionDuration += 1;
+                const hours = Math.floor(sessionDuration / 60);
+                const minutes = sessionDuration % 60;
+                sessionInfo.textContent = `${hours} hours ${minutes} minutes`;
+            }, 60000); // Update every minute
+        });
+    </script>
+</body>
+</html>
